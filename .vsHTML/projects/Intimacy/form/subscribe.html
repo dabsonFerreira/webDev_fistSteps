@@ -1,0 +1,77 @@
+<h1>Inscrição</h1>
+<form action="http://localhost:3003/users" method="POST">
+    <input class="names" type="text" name="Name">Nome
+    <input class="names" type="text" name="Surname">Sobrenome
+
+    <select class="select" name="Estado">
+        <option> Selecione </option>
+
+        <option value="AC">Acre</option> 
+        <option value="AP">Amapá</option> 
+        <option value="AL">Alagoas</option> 
+        <option value="AC">Amazonas</option> 
+        <option value="BA">Bahia</option> 
+        <option value="CE">Ceará</option> 
+        <option value="DF">Distrito Federal</option> 
+        <option value="ES">Espírito Santo</option> 
+        <option value="GO">Goiás</option> 
+        <option value="MA">Maranhão</option> 
+        <option value="MT">Mato Grosso</option> 
+        <option value="MS">Mato Grosso do Sul</option> 
+        <option value="MG">Minas Gerais</option> 
+        <option value="PA">Pará</option> 
+        <option value="PB">Paraíba</option> 
+        <option value="PR">Paraná</option> 
+        <option value="PE">Pernambuco</option> 
+        <option value="PI">Piauí</option> 
+        <option value="RR">Roraima</option> 
+        <option value="RO">Rondônia</option> 
+        <option value="RJ">Rio de Janeiro</option> 
+        <option value="RN">Rio Grande do Norte</option> 
+        <option value="RS">Rio Grande do Sul</option> 
+        <option value="SC">Santa Catarina</option> 
+        <option value="SP">São Paulo</option> 
+        <option value="SE">Sergipe</option> 
+        <option value="TO">Tocantins</option> 
+        
+    </select>
+
+    <input type="text" name="Address">Endereço
+
+
+    <input type="text" name="login">Email
+    <input type="password" name="password">Senha
+
+    <div>
+        <input type="checkbox" name="Use_Term"> Concordo Com os Termos de Uso 
+    </div>
+
+    <div>
+        <input type="radio" name="ads" value="yes" >Receber Propagandas por Email
+        <input type="radio" name="ads" value="no" >Não Receber Propagandas por Email       
+    </div> 
+
+    
+
+    <button class="cad">Cadastrar</button>
+</form>
+
+<style>
+    .names{
+        display:inline;
+    }
+    input{
+        display: block;
+        margin-top: 10px;
+    }
+    input[type=radio]{
+        display:inline    
+    }
+    .select{
+        display:block;
+        margin-top: 10px;
+    }
+    .cad{
+        margin-top: 10px;
+    }
+</style>

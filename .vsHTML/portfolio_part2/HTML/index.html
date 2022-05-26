@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content="width=device-width, initial-scale = 1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>  Dabson Ferreira  </title> 
+        <style>
+            
+            .title {                
+                position: absolute;
+                top: 1px;
+                left: 500px;
+                color:#7027C3;
+            }
+
+            .highlights {
+                position : relative;
+                top      : 80px;              
+                font-size: 20;
+                padding  : 100;
+            }
+
+            .contact{
+                position : relative;
+                top      : 400px; 
+                padding  : 100px;
+                color    : #00ffffff;
+
+            }
+
+
+        </style>
+    </head>
+
+    <!--------------------------------------------------------------------------------->
+    <body>
+        <h1 class="title"> Dabson Ferreira</h1><!--id is a property that is a unique identifier in a page-->
+        <br><!--not common used to break lines... you must use margin from css to set spaces-->
+        <nav>    
+            <!--<a href="cv/cv_dabson.html"><span class = "highlights">Curriculo</span>--><!--class is also a property but style related. There may be several--></a><!--a is the tag that creats link-->
+            <!--<a href="projects/pj_dabson.html"><span class = "highlights">Projetos</span>--><!--class is also a property but style related. There may be several--></a>-->
+        
+            <a href ="cv_dabson.html" target="_blank"><span class = "highlights">Curriculo</span><!--class is also a property but style related. There may be several--></a><!--a is the tag that creats link-->
+            <a href ="pj_dabson.html"  ><span class = "highlights">Projetos</span><!--class is also a property but style related. There may be several--></a>
+        
+        </nav>
+        <section id="content"></section>
+        <footer>
+            <h6> <span class="contact">Contato: (32) 9 8449-8544 </span> <span class="contact">Email: ferreira.santos@engenharia.ufjf.br</span> </h6>
+        </footer>
+        <!--we want to throw cv and project in content, not to open another tab. So we need an ajax request-->
+        <!--to do so, we need to intercept the click on the link-->
+        
+        <!--this method isn't working in browser. Must change the localhost-->
+       
+       
+       <script>//to use JS 
+            document.querySelectorAll('a').forEach(link =>{//we got to get all links
+                const content = document.getElementById('content')
+                link.onclick = function(e){
+                     e.preventDefault();
+                     console.log('ação')
+                     fetch(link.href)//doing the ajax request
+                        .then(resp => resp.text()/*it is taking the html content of the page we are requiring*/)
+                        .then(html => content.innerHTML = html)
+                }
+            })
+        </script>
+
+        <!--script>//to use JS //this is the same pass but now using wm-nav
+            document.querySelectorAll('[wm-nav]').forEach(link =>{//we got to get all links
+                const content = document.getElementById('content')
+                link.onclick = function(e){
+                     e.preventDefault();
+                     console.log('ação')
+                     fetch(link.getAttribute('wm-nav'))//doing the ajax request
+                        .then(resp => resp.text()/*it is taking the html content of the page we are requiring*/)
+                        .then(html => content.innerHTML = html)
+                }
+            })-->
+        </script>
+    </body>
+</html>

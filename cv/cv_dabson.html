@@ -1,0 +1,132 @@
+<h1 class="title">Dabson Ferreira dos Santos</h1>           <span class="contact_cv"><h4>Telefone:   (32) 9 8449-8544   </h4></span>  
+                                                            <span class="contact_cv"><h4>Email:      ferreira.santos@engenharia.ufjf.br</h4></span>
+
+
+<ul>
+    <span wm-folder> <h3 class="topics_cv"><strong>Formação</strong></h3></span>
+
+
+<ul><strong class="actTitle">Graduando em Engenharia Elétrica - habilitação em Sistemas Eletrônicos </strong>- Universidade Federal de Juiz de Fora (2015-2023)</ul>
+</ul>
+
+
+
+<ul>
+    <span wm-folder><h3 class="topics_cv"><strong>Experiências</h3></strong></span>
+        <ul>
+            <ul>
+                <span wm-subfolder><li><strong class="actTitle"><h4>(Voluntário) Implementação de Circuito Lockin Embarcado em FPGA (2022):</h2></strong></li></span>
+                    <ul>
+                        <ul>
+                            <li><strong class="subsec">Principais atividades:</strong></li><ul> <li> Testes em FPGAs e programação do processador HPS.</li> </ul>
+                            <li><strong class="subsec">Conhecimentos requeridos:</strong></li><ul><li> Programação nas linguagens C e Verilog; uso dos softwares Quartus e EDS; Sistema Operacional Linux.</li></ul>
+                        </ul>
+                    </ul>
+            </ul>
+
+            
+
+            <ul>
+            <span wm-subfolder><li><strong class="actTitle"><h4>(Bolsista) Técnicas de Deep Learning para Reconstrução de Energia em Detectores de Partículas (2021-2022):</strong></h4></li></span>
+                        <ul>
+
+                            <ul>
+
+                                <li><strong class="subsec">Principais atividades:<ul><li></strong> Implementação em ponto flutuante de uma rede neural perceptron multicamada embarcada em FPGA.</strong></li></ul> </li>
+                                <li><strong class="subsec">Conhecimentos requeridos:<ul><li></strong> Programação nas linguagens C, Python e MATLAB; uso de softwares para processamento e análise de dados e ferramenta GIT para organização das implementações.</strong></li></ul></li>
+                            
+                            </ul>            
+                        
+                        </ul>
+            </ul>
+
+
+            <ul>
+            <span wm-subfolder><li><strong class="actTitle"><h4>(Bolsista) Análise dos Dados do Experimento Neutrinos Angra (2020):</strong></h4></li></span>
+                        <ul>
+                            <ul>
+                            
+                                <li><strong class="subsec">Principais atividades:</strong><ul><li>Implementação em ponto fixo de uma rede neural perceptron multicamada embarcada em FPGA.</li></ul></li>                                
+                                <li><strong class="subsec">Conhecimentos requeridos:</strong><ul><li>Programação nas linguagens C, Python e MATLAB; uso de softwares para processamento e análise de dados.</li></ul></li>                    
+                            
+                            </ul>
+                        
+                        </ul>
+            </ul>
+
+                
+            <ul>    
+            <span wm-subfolder><li><strong class="actTitle"><h4>(Voluntário) em processamento de sinais de pacientes chagásicos (2018-2019):</h4></strong></li></span>
+                        <ul>
+                            <ul>
+
+                            <li><strong class="subsec">Principais atividades:</strong><ul><li> Implementação da técnica Detrended Fluctuation Analysis para obtenção de um estimador que pudesse diferenciar pacientes com doença de chagas e pacientes sem a doença.</li></ul></li> 
+                            <li><strong class="subsec">Conhecimentos requeridos:</strong><ul><li> Programação na linguagem MATLAB.</li></ul>
+                            
+                            </ul>
+
+                        </ul>
+            </ul>
+                
+
+            <ul>
+                <span wm-subfolder><li><strong class="actTitle"><h4>Monitoria em Matemática Aplicada à Saúde (2016-2019):</h4></strong></li></span>  
+                            <ul>    
+                                
+                                <ul>
+                                    <li><strong class="subsec">Principais atividades:</strong0></li><ul><li> Auxiliar alunos na compreensão do conteúdo aprendido em aulas.</li></ul>
+                                </ul>
+
+                            </ul>
+                    
+
+            </ul>
+        </ul>
+
+
+</ul>
+
+
+
+
+
+
+<ul>
+    <span wm-folder><h3 class="topics_cv"><strong>Conhecimentos Específicos</strong></h3></span>
+    <ul>
+
+        <li><strong class="subsec">Linguagens de Programação:</strong> JavaScript, CSS, HTML, C, MATLAB, Python, SQL.</li>
+        <li><strong class="subsec">Linguagem de Descrição de Hardware:</strong>  Verilog.</li>
+        <li><strong class="subsec">Softwares e Ferramentas:</strong> Quartus II, MATLAB.</li>
+        <li><strong class="subsec">Sistema de Controle de Versão Distribuído:</strong> GIT.</li>
+        <li><strong class="subsec">Idiomas:</strong> Inglês avançado.</li>
+        <li><strong class="subsec">Banco de Dados:</strong>  MySQL, MongoDB</li>
+    
+    </ul>
+
+</ul>
+
+<script>
+
+    document.querySelectorAll('[wm-folder]').forEach(folder =>{
+        folder.onclick = function(e){
+           /// console.log('teste')
+           const ul = folder.nextElementSibling
+           
+           //console.log(ul)
+           const takingCurrentDisplay = ul.style.display
+           
+           ul.style.display = takingCurrentDisplay === 'none' ? 'block' : 'none'//changing visibility. If it is visible (none) it change to invisible (block)... otherwise to visible 
+           
+        }
+    })
+
+    document.querySelectorAll('[wm-subfolder]').forEach(fun =>{
+        fun.onclick = function(e){
+            const ul_s = fun.nextElementSibling
+            const takingCurrentDisplay_s = ul_s.style.display
+            ul_s.style.display = takingCurrentDisplay_s === 'none' ? 'block' : 'none'
+        }
+    })
+
+</script>

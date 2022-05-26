@@ -1,0 +1,5 @@
+/*
+    If you are using JS in frontEnd you will be executing it on browser
+    If you are using JS in backEnd you will be executing it on Node
+
+*/
