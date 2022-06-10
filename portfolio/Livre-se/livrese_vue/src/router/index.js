@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 import Product from '../views/Product.vue'
 import Category from '../views/Category.vue'
+import Search from '../views/Search.vue'
 
 const routes = [
   {
@@ -18,6 +19,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
+
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+
   {
     path: '/:category_slug/:product_slug',
     name: 'Product',
