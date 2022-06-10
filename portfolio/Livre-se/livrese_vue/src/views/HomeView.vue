@@ -16,7 +16,9 @@
         <h2 class="is-size-2 has-text-centered">Últimos Produtos</h2>
       </div>
 
-      <div class="column is-3" v-for="product in latestProducts" v-bind:key="product.id">
+      <div class="column is-3"
+      v-for="product in latestProducts"
+      v-bind:key="product.id">
         <div class="box">
           <figure class="image mb-4">
             <img :src="product.get_thumbnail">
@@ -47,13 +49,23 @@ export default {
   },
   mounted(){
     this.getLatestProducts()
+
+    document.title = 'Home | Livre-se'
   },
   methods: {
-    getLatestProducts(){
-      axios.get('/api/v1/latest-products/').then(response =>{this.latestProducts = response.data})
-      .catch(error => {
-        console.log(error)
-      })      
+    async getLatestProducts(){
+        this.$store.commit('setIsLoading', true)
+        await axios
+        .get('/api/v1/latest-products/')
+        .then(response =>{
+            this.latestProducts = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })    
+        
+        this.$store.commit('setIsLoading', false)
+
     }
   }
 }
