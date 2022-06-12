@@ -38,7 +38,13 @@
 
           <div class="navbar-item">
             <div class="buttons">
-              <router-link to="/log-in" class="button is-light">Log in</router-link>
+              <template v-if="$store.state.isAuthenticated">
+                <router-link to="/my-account" class="button is-light">Minha conta</router-link>
+              </template>
+
+              <template v-else>
+                <router-link to="/log-in" class="button is-light">Log in</router-link>
+              </template>
               
               <router-link to="/cart" class="button is-success">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
@@ -69,7 +75,7 @@
 
 
 <script>
-  
+  import axios from 'axios'
   export default {
     data(){
       return {
@@ -81,6 +87,14 @@
     },
     beforeCreate(){
       this.$store.commit('initializeStore')//isso chama o mutations do index
+
+      const token = this.$store.state.token//criado após mudar o index de store acrescentando funções
+
+      if (token){
+        axios.defaults.headers.common['Authorization'] = 'Token' + token
+      } else {
+        axios.defaults.headers.common['Authorization'] = ""
+      }
     },
     mounted(){
       this.cart = this.$store.state.cart

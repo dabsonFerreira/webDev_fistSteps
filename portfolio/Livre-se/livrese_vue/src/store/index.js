@@ -16,6 +16,15 @@ export default createStore({
       }else{
         localStorage.setItem('cart', JSON.stringify(state.cart))
       }
+
+      if (localStorage.getItem('token')){//após login.vue - checagem para ver se há um item chamado token no armazenamento local
+        state.token = localStorage.getItem('token')
+        state.isAuthenticated = true
+      } else {
+        state.token = ''
+        state.isAuthenticated = false
+      }
+
     },
     addToCart(state, item){
       const exists = state.cart.items.filter(i=>i.product.id === item.product.id)
@@ -29,7 +38,19 @@ export default createStore({
     },
     setIsLoading(state, status){
       state.isLoading = status
-    }
+    },
+    setToken(state, token){//acrescentado após login.vue. não sei para que serve token
+      state.token = token
+      state.isAuthenticated = true
+    },
+    removeToken(state){//acrescentado após login.vue. não sei para que serve token
+      state.token = ''
+      state.isAuthenticated = false
+    },
+    clearCart(state){
+      state.cart = {items: []}
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
   },
   actions: {
   },
