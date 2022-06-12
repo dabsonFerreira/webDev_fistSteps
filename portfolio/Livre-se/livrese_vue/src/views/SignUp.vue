@@ -68,7 +68,7 @@ export default{
                 this.errors.push('Você esqueceu o nome de usuário!')
             }
             if (this.password == ''){
-                this.errors.push('Senha curta!')
+                this.errors.push('Digite uma senha!')
             }
             if (this.password !== this.password2){
                 this.errors.push('Senhas diferentes!')
@@ -81,29 +81,29 @@ export default{
                 }
 
                 axios
-                    .post("/api/v1/users", formData)
+                    .post("/api/v1/users/", formData)
                     .then(response => {
                         toast({
-                            message: 'Conta Criada! Agora você já pode fazer o login',
+                            message: 'Conta criada! Por favor, faça log in!',
                             type: 'is-success',
                             dismissible: true,
                             pauseOnHover: true,
                             duration: 2000,
-                            position: 'buttom-right',
+                            position: 'bottom-right',
                         })
+
                         this.$router.push('/log-in')
                     })
                     .catch(error => {
-                        if(error.response){
-                            for (const property in error.response.data){
-                                this.error.push(`${property}: ${error.response.data[property]}`)
+                        if (error.response) {
+                            for (const property in error.response.data) {
+                                this.errors.push(`${property}: ${error.response.data[property]}`)
                             }
 
                             console.log(JSON.stringify(error.response.data))
-                        }
-
-                        else if (error.message){
-                            this.errors.push('Algo deu errado. Por favor tente novamente!')
+                        } else if (error.message) {
+                            this.errors.push('Algo deu errado. Por favor, tente novamente!')
+                            
                             console.log(JSON.stringify(error))
                         }
                     })
