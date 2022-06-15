@@ -39,9 +39,9 @@
             </div>
 
             <div class="column is-12 box">
-                <h2 class="subtitle">Detalhes de Transporte</h2>
+                <h2 class="subtitle">Detalhes de Envio</h2>
 
-                <p class="has-text-grey mb-4">* Campo obrigatório</p>
+                <p class="has-text-grey mb-4">* Campo Obrigatório</p>
 
                 <div class="columns is-multiline">
                     <div class="column is-6">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="field">
-                            <label>Último nome*</label>
+                            <label>Sobrenome*</label>
                             <div class="control">
                                 <input type="text" class="input" v-model="last_name">
                             </div>
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="field">
-                            <label>CPF*</label>
+                            <label>CEP*</label>
                             <div class="control">
                                 <input type="text" class="input" v-model="zipcode">
                             </div>
@@ -109,7 +109,7 @@
                 <template v-if="cartTotalLength">
                     <hr>
 
-                    <button class="button is-dark" @click="submitForm">Pagar com Stripe</button>
+                    <button class="button is-dark" @click="submitForm">Pague com Stripe</button>
                 </template>
             </div>
         </div>
@@ -159,31 +159,31 @@ export default {
             this.errors = []
 
             if (this.first_name === '') {
-                this.errors.push('Está faltando o primeiro nome!')
+                this.errors.push('Falta o nome!')
             }
 
             if (this.last_name === '') {
-                this.errors.push('Está faltando o último nome!')
+                this.errors.push('Falta o sobrenome!')
             }
 
             if (this.email === '') {
-                this.errors.push('Está faltando o e-mail!')
+                this.errors.push('Falta o email!')
             }
 
             if (this.phone === '') {
-                this.errors.push('Está faltando o telefone!')
+                this.errors.push('Falta o telefone!')
             }
 
             if (this.address === '') {
-                this.errors.push('Está faltando o endereço!')
+                this.errors.push('Falta o endereço!')
             }
 
             if (this.zipcode === '') {
-                this.errors.push('Está faltando o CEP!')
+                this.errors.push('Falta o CEP!')
             }
 
             if (this.place === '') {
-                this.errors.push('Está faltando a cidade!')
+                this.errors.push('Falta a Cidade!')
             }
 
             if (!this.errors.length) {
@@ -235,7 +235,7 @@ export default {
                     this.$router.push('/cart/success')
                 })
                 .catch(error => {
-                    this.errors.push('Algo deu errado. Por favor tente novamente')
+                    this.errors.push('Algo deu errado. Por favor tente novamente!')
 
                     console.log(error)
                 })

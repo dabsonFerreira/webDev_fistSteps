@@ -3,11 +3,7 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Minha Conta</h1>
-            </div>
-
-            <div class="column is-12">
-                <button @click="logout()" class="button is-danger">Log out</button>
-            </div>
+            </div>          
 
             <hr>
 
@@ -18,7 +14,21 @@
                     v-for="order in orders"
                     v-bind:key="order.id"
                     v-bind:order="order" />
+                
             </div>
+
+            <hr>
+
+
+
+            <myProducts />
+
+            <hr>
+            
+            <div class="column is-12">
+                <button @click="logout()" class="button is-danger">Sair</button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -27,15 +37,18 @@
 import axios from 'axios'
 
 import OrderSummary from '@/components/OrderSummary.vue'
+import myProducts from  '@/components/myProducts.vue'
 
 export default {
     name: 'MyAccount',
     components: {
-        OrderSummary
+        OrderSummary,
+        myProducts
     },
     data() {
         return {
-            orders: []
+            orders: [],
+            myProduct: []
         }
     },
     mounted() {
@@ -69,6 +82,7 @@ export default {
 
             this.$store.commit('setIsLoading', false)
         }
+        
     }
 }
 </script>

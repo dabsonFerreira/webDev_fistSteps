@@ -1,6 +1,8 @@
 from io import BytesIO
 from PIL import Image
 
+from django.contrib.auth.models import User #importei para relacionar produtos aos vendedores
+
 from django.core.files import File
 from django.db import models
 
@@ -19,6 +21,7 @@ class Category(models.Model):
         return f'/{self.slug}/'
 
 class Product(models.Model):
+    #user = models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE)#acrescentei para tentar por a cada usuario seu produto
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -27,6 +30,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/', blank=True,null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    #quantity = models.DecimalField(max_digits=6, decimal_places=2,default=0)
 
     class Meta:
         ordering = ('-date_added',)
@@ -65,3 +69,4 @@ class Product(models.Model):
         thumbnail = File(thumb_io, name=image.name)
 
         return thumbnail
+

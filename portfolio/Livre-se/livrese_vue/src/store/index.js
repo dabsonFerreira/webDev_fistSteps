@@ -3,52 +3,52 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     cart: {
-      items: [],
+        items: [],
     },
     isAuthenticated: false,
     token: '',
     isLoading: false
   },
   mutations: {
-    initializeStore(state){
-      if(localStorage.getItem('cart')){
+    initializeStore(state) {
+      if (localStorage.getItem('cart')) {
         state.cart = JSON.parse(localStorage.getItem('cart'))
-      }else{
+      } else {
         localStorage.setItem('cart', JSON.stringify(state.cart))
       }
 
-      if (localStorage.getItem('token')){//após login.vue - checagem para ver se há um item chamado token no armazenamento local
-        state.token = localStorage.getItem('token')
-        state.isAuthenticated = true
+      if (localStorage.getItem('token')) {
+          state.token = localStorage.getItem('token')
+          state.isAuthenticated = true
       } else {
-        state.token = ''
-        state.isAuthenticated = false
-      }
-
+          state.token = ''
+          state.isAuthenticated = false
+      } 
     },
-    addToCart(state, item){
-      const exists = state.cart.items.filter(i=>i.product.id === item.product.id)
-
-      if(exists.length){
+    addToCart(state, item) {
+      const exists = state.cart.items.filter(i => i.product.id === item.product.id)
+      if (exists.length) {
         exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
-      } else{
+      } else {
         state.cart.items.push(item)
       }
-      localStorage.setItem('cart',JSON.stringify(state.cart))
+
+      localStorage.setItem('cart', JSON.stringify(state.cart))
     },
-    setIsLoading(state, status){
+    setIsLoading(state, status) {
       state.isLoading = status
     },
-    setToken(state, token){//acrescentado após login.vue. não sei para que serve token
-      state.token = token
-      state.isAuthenticated = true
+    setToken(state, token) {
+        state.token = token
+        state.isAuthenticated = true
+    },  
+    removeToken(state) {
+        state.token = ''
+        state.isAuthenticated = false
     },
-    removeToken(state){//acrescentado após login.vue. não sei para que serve token
-      state.token = ''
-      state.isAuthenticated = false
-    },
-    clearCart(state){
-      state.cart = {items: []}
+    clearCart(state) {
+      state.cart = { items: [] }
+
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
   },

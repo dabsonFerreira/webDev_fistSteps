@@ -40,8 +40,8 @@ export default {
             return item.quantity * item.product.price
         },
         orderTotalLength(order) {
-            return order.items.reduce((acc, curVal) => {
-                return acc += curVal.quantity
+            return order.items.reduce((acumulador, valorAtual) => {
+                return acumulador += valorAtual.quantity
             }, 0)
         },
     }
