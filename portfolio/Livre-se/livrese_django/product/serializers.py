@@ -12,8 +12,9 @@ class ProductSerializer(serializers.ModelSerializer):
             "description",
             "price",
             "get_image",
-            "get_thumbnail"
-            #"quantity"#acrescentei
+            "get_thumbnail",
+            "quantity",#acrescentei
+            "idConta"#acrescentei - ideia de relacionar conta ao produto!
         )
 
 class CategorySerializer(serializers.ModelSerializer):
