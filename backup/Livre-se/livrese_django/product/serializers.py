@@ -14,7 +14,11 @@ class ProductSerializer(serializers.ModelSerializer):
             "get_image",
             "get_thumbnail",
             "quantity",#acrescentei
+<<<<<<< HEAD:backup/Livre-se/livrese_django/product/serializers.py
             #"user_id"
+=======
+            "idConta"#acrescentei - ideia de relacionar conta ao produto!
+>>>>>>> main:portfolio/Livre-se/livrese_django/product/serializers.py
         )
 
 class CategorySerializer(serializers.ModelSerializer):

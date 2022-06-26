@@ -29,8 +29,13 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/', blank=True,null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+<<<<<<< HEAD:backup/Livre-se/livrese_django/product/models.py
     quantity = models.IntegerField(default=0)
     #user = models.ForeignKey(User, related_name='addProductFE', on_delete=models.CASCADE)#acrescentei para tentar por a cada usuario seu produto
+=======
+    quantity = models.DecimalField(max_digits=6, decimal_places=2,default=0)
+    user = models.ForeignKey(User, related_name='putProduct', on_delete=models.CASCADE)#acrescentei para tentar por a cada usuario seu produto
+>>>>>>> main:portfolio/Livre-se/livrese_django/product/models.py
 
     class Meta:
         ordering = ('-date_added',)

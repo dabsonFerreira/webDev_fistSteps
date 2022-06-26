@@ -16,12 +16,17 @@
 
                 <p><strong>Preço: R${{  product.price  }}</strong></p>
                 <div class="field has-addons mt-6">
+                    Estoque: {{product.quantity}}
+                </div>
+                <div class="field has-addons mt-6">
                     <div class="control">
                         <input type="number" class="input" min="1" v-model="quantity">
                     </div>
+                
+                
                     
                     <div class="control">
-                        <a class="button is-dark" @click="addToCart()">Adicionar ao carrinho </a>
+                        <a class="button is-success" @click="addToCart()">Adicionar ao carrinho </a>
                     </div>
                 </div>
             </div>
@@ -38,7 +43,7 @@ export default{
     data(){
         return{
             product: {},
-            quantity: 1
+            quantity: null
         }
     },
     mounted(){
@@ -63,25 +68,37 @@ export default{
         },
 
         addToCart(){
-        
-            if(isNaN(this.quantity)||this.quantity<1){
-                this.quantity = 1
-            }
-            const item = {
-                product: this.product,
-                quantity: this.quantity
-            }
+            if (this.product.quantity>0){
+                if(isNaN(this.quantity)||this.quantity<1){
+                    this.quantity = 1
+                }
+                const item = {
+                    product: this.product,
+                    quantity: this.quantity
+                }
 
-            this.$store.commit('addToCart', item)
+                this.$store.commit('addToCart', item)
 
-            toast({
-                message: 'O produto foi adicionado ao carrinho',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-            })
+                toast({
+                    message: 'O produto foi adicionado ao carrinho',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                })
+            }
+            else{
+                toast({
+                    message: 'Não há produto no estoque',
+                    type: 'is-danger',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    })
+
+            }
         }
 
         
