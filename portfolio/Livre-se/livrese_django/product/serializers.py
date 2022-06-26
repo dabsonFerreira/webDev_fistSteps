@@ -12,8 +12,9 @@ class ProductSerializer(serializers.ModelSerializer):
             "description",
             "price",
             "get_image",
-            "get_thumbnail"
-            #"quantity"#acrescentei
+            "get_thumbnail",
+            "quantity",#acrescentei
+            #"user_id"
         )
 
 class CategorySerializer(serializers.ModelSerializer):

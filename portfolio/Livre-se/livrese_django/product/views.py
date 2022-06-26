@@ -21,6 +21,32 @@ class categories(APIView):
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
+##########another of my steps######################################
+#meus acréscimos para tentar ler do FE
+from django.conf import settings
+#from django.contrib.auth.models import User
+from django.shortcuts import render
+
+from rest_framework import status, authentication, permissions
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.views import APIView
+
+#@api_view(['POST'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+
+def addProductFE(request):
+    addProduct = ProductSerializer(data=request.data)#tentando ler FE
+    if addProduct.is_valid():
+        try:
+            return Response(addProduct.data, status=status.HTTP_201_CREATED)
+        except Exception:
+            return Response(addProduct.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    return Response(addProduct.errors, status = status.HTTP_400_BAD_REQUEST)
+
+######################################################
+
 class ProductDetail(APIView):
     def get_object(self, category_slug, product_slug):
         try:

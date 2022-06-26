@@ -41,38 +41,39 @@
                         <div class="field">
                             <label>Dê a sua visão do livro e faça quererem desfrutar da mesma experiência*</label>
                             <div class="control">
-                                <textarea v-model="message" placeholder="Escreva bastante"></textarea>
+                                <textarea class="column is-12" v-model="message" placeholder="Escreva bastante"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="column is-12 box">
+                    <div class="column is-6 box">
 
                         <div class="field">
                             <label>Quanto vale dessa experiência?*</label>
                             <div class="control">
-                                <input type="number" class="input" v-model="price">
+                                <input type="number"  v-model="price">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Carregue imagens que pintem o quadro de suas palavras:*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="image"><!--como buscar imagem?-->
+                                <input type="file" v-on="image"><!--como buscar imagem?-->
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Carregue uma imagem que será um pequeno retrato do livro na estante da Livre-se*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="thumbnail">
+                                <input type="file" v-on="thumbnail"><!--@change="onFileSelected" não sei se é pra usar isso-->       
+                                <!-- <input type="text" class="input" v-model="thumbnail"> -->
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Quantos exemplares dessa raridade você planeja disponibilizar?*</label>
                             <div class="control">
-                                <input type="number" class="input" v-model="quantity">
+                                <input type="number"  v-model="quantity">
                             </div>
                         </div>
                     </div>
@@ -126,6 +127,16 @@
             },
 
             async addProduct(event){
+
+                this.image = event.target.files[0]
+                //n sei se deve ser feito aki o proximo passo
+                const fd = new FormData()
+                fd.append('image', this.image, this.image.name)//não sei se da pra fazer append aki!
+                this.thumbnail = event.target.files[0]
+                //n sei se deve ser feito aki o proximo passo
+                const fd2 = new FormData()
+                fd2.append('thumbnail', this.thumbnail, this.thumbnail.name)//não sei se da pra fazer append aki!
+
                 event.preventDefault()
                 // console.log('product iserted')
                 const data = {
@@ -134,8 +145,10 @@
                     slug:        this.slug,       
                     description: this.description,
                     price:       this.price,      
-                    image:       this.image,      
-                    thumbnail:   this.thumbnail,  
+                    //image:       this.image,      
+                    image:       this.fd,      
+                    //thumbnail:   this.thumbnail,  
+                    thumbnail:   this.fd2,  
                     date_added:  this.date_added, 
                     quantity:    this.quantity,
                     status: "solicitado"
@@ -146,10 +159,10 @@
                 
                 await axios
                 .post('/api/v1/addProductFE/', data)//tem que criar no rout
-                .then(response => {
+                /* .then(response => {
                     this.$store.commit('clearCart')
                     this.$router.push('/cart/success')
-                })
+                }) */
                 .catch(error => {
                     this.errors.push('Algo deu errado. Por favor tente novamente!')
 
