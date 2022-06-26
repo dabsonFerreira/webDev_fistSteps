@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "get_image",
             "get_thumbnail",
             "quantity",#acrescentei
-            #"user_id"
+            "user"
         )
 
 class CategorySerializer(serializers.ModelSerializer):

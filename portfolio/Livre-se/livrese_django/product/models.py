@@ -29,8 +29,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/', blank=True,null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    quantity = models.IntegerField(default=0)
-    #user = models.ForeignKey(User, related_name='addProductFE', on_delete=models.CASCADE)#acrescentei para tentar por a cada usuario seu produto
+    quantity = models.IntegerField(default=1)
+    user = models.ForeignKey(User, related_name='addProductFE', default=0, on_delete=models.CASCADE)#acrescentei para tentar por a cada usuario seu produto
 
     class Meta:
         ordering = ('-date_added',)

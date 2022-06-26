@@ -45,6 +45,16 @@ def addProductFE(request):
     
     return Response(addProduct.errors, status = status.HTTP_400_BAD_REQUEST)
 
+#tentativa de enviar pro front a lista
+class OrdersList(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        myProducts = Product.objects.filter(user=request.user)
+        serializer = ProductSerializer(myProducts, many=True)
+        return Response(serializer.data)
+
 ######################################################
 
 class ProductDetail(APIView):
