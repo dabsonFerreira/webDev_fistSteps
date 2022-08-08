@@ -51,8 +51,22 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    'http://127.0.0.1:8000',
 ]
-
+#####
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8000',
+]
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8000',
+]
+#####
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,6 +79,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+########################
+
+########################
 
 ROOT_URLCONF = 'livrese_django.urls'
 
