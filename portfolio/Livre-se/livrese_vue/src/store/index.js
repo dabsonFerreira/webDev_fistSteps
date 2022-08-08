@@ -5,6 +5,9 @@ export default createStore({
     cart: {
         items: [],
     },
+    userProduct:{
+      produtc: [],
+    },
     isAuthenticated: false,
     token: '',
     isLoading: false
@@ -35,6 +38,19 @@ export default createStore({
 
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
+
+    addProduct(state, p){
+      const exists = state.userProduct.produtc.filter(i => i.product.id === p.product.id)
+      if (exists.length) {
+        exists[0].quantity = parseInt(exists[0].quantity) + parseInt(p.quantity)
+      } else {
+        state.userProduct.produtc.push(p)
+      }
+
+      localStorage.setItem('userProduct', JSON.stringify(state.userProduct))  
+    },
+
+
     setIsLoading(state, status) {
       state.isLoading = status
     },

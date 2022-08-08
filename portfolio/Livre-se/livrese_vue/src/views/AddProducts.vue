@@ -5,6 +5,8 @@
                 <h1 class="title">Adicionar um Produto</h1>
             </div>
 
+            
+
 
             <div class="column is-12 box">
             
@@ -15,10 +17,9 @@
                     <div class="column is-6">
                         <div class="field">
                             <label>Categoria do Livro<!--precisa buscar as possibilidades no db-->*</label>
-                            <select class="control">                                    
-                                <option v-for= "categoria in category" 
-                                    :key="categoria.id"
-                                    value="categoria.name">
+                            <select class="control" v-model="selected">                                    
+                                <option v-for= "categoria in category"                                     
+                                    :value="categoria.name">
                                         {{categoria.name}}
                                 </option>
                             </select>
@@ -34,14 +35,14 @@
                         <div class="field">
                             <label>Nome com '-' sem espaço*</label>
                             <div class="control">
-                                <input type="email" class="input" v-model="slug">
+                                <input type="text" class="input" v-model="slug">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Dê a sua visão do livro e faça quererem desfrutar da mesma experiência*</label>
                             <div class="control">
-                                <textarea class="column is-12" v-model="message" placeholder="Escreva bastante"></textarea>
+                                <textarea class="column is-12" v-model="description" placeholder="Escreva bastante"></textarea>
                             </div>
                         </div>
                     </div>
@@ -58,14 +59,14 @@
                         <div class="field">
                             <label>Carregue imagens que pintem o quadro de suas palavras:*</label>
                             <div class="control">
-                                <input type="file" v-on="image"><!--como buscar imagem?-->
+                                <input type="file" name="image" @change="img"><!--como buscar imagem?-->
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Carregue uma imagem que será um pequeno retrato do livro na estante da Livre-se*</label>
                             <div class="control">
-                                <input type="file" v-on="thumbnail"><!--@change="onFileSelected" não sei se é pra usar isso-->       
+                                <input type="file" name="thumbnail" @change="thumb"><!--@change="onFileSelected" não sei se é pra usar isso-->       
                                 <!-- <input type="text" class="input" v-model="thumbnail"> -->
                             </div>
                         </div>
@@ -80,7 +81,7 @@
                     
                 </div>
 
-                <button class="button is-success" @click="addProduct">Adicionar livramento</button>
+                <button class="button is-success" @click="addProduct()">Adicionar livramento</button>
             
                 
             </div>
@@ -93,12 +94,14 @@
 
 <script>
     import axios from 'axios'
+    import {csrftoken} from '../components/csrf/csrf_token'
     export default {
-        name: 'AddProducts',
+        name: 'userProduct',
+        
         data(){
             return {
                 category: [],
-                //bdCategory: null,   
+                selected: null,   
                 name:null,       
                 slug:null,       
                 description:null,
@@ -106,11 +109,31 @@
                 image:null,      
                 thumbnail:null,  
                 date_added:null, 
-                quantity: null
+                quantity: null,
+                user: null,
+
             }
         },
 
         methods:{
+
+            
+            img(e){
+                const fd = new FormData()
+                fd.append('image', e.target.files[0])//não sei se da pra fazer append aki!
+                this.image = fd
+                //console.log(this.image)
+                
+            },
+            
+            thumb(e){
+                const fd2 = new FormData()
+                fd2.append('thumbnail', e.target.files[0])//não sei se da pra fazer append aki!
+                this.thumbnail = fd2
+                //console.log(this.thumbnail)
+               
+            },
+
             async getCategory() {//tentativa de ler bd de produtos para pegar categoria
                 this.$store.commit('setIsLoading', true)
 
@@ -126,54 +149,59 @@
                 this.$store.commit('setIsLoading', false)
             },
 
-            async addProduct(event){
 
-                this.image = event.target.files[0]
-                //n sei se deve ser feito aki o proximo passo
-                const fd = new FormData()
-                fd.append('image', this.image, this.image.name)//não sei se da pra fazer append aki!
-                this.thumbnail = event.target.files[0]
-                //n sei se deve ser feito aki o proximo passo
-                const fd2 = new FormData()
-                fd2.append('thumbnail', this.thumbnail, this.thumbnail.name)//não sei se da pra fazer append aki!
 
-                event.preventDefault()
-                // console.log('product iserted')
-                const data = {
-                    category:    this.category,   
-                    name:        this.name,       
-                    slug:        this.slug,       
-                    description: this.description,
-                    price:       this.price,      
-                    //image:       this.image,      
-                    image:       this.fd,      
-                    //thumbnail:   this.thumbnail,  
-                    thumbnail:   this.fd2,  
-                    date_added:  this.date_added, 
-                    quantity:    this.quantity,
-                    status: "solicitado"
+            async addProduct(){
+                //console.log(this.selected)
+            //parece que tenho que adicionar token para n dar erro de autorizacao
+                //console.log(this.image)
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = mm + '/' + dd + '/' + yyyy;
+                this.date_added = today
+
+
+                
+                
+                const dados_1 ={
+                    "category":    this.selected,   
+                    "name":        this.name,       
+                    "slug":        this.slug,       
+                    "description": this.description,
+                    "price":       this.price,      
+                    "image":       this.image,      
+                    "thumbnail":   this.thumbnail,  
+                    "date_added":  this.date_added, 
+                    "quantity":    this.quantity,
+                    "user":        this.user,
+                    "likes":       0         
                 }
-
-                //console.log(data)
-                const dataJson = JSON.stringify(data)//para fazer a comun. com o BE precisa de JSON
+                console.log(dados_1)
                 
                 await axios
-                .post('/api/v1/addProductFE/', data)//tem que criar no rout
-                /* .then(response => {
-                    this.$store.commit('clearCart')
-                    this.$router.push('/cart/success')
-                }) */
-                .catch(error => {
-                    this.errors.push('Algo deu errado. Por favor tente novamente!')
+                    .post('/api/v1/addProductFE/', dados_1)//tem que criar no rout
+                    .then(response => {       
+                        console.log(dados_1)                 
+                        this.$router.push('/my-account')
+                    }) 
+                    .catch(error => {
+                        console.log(error)
+                    })
 
-                    console.log(error)
-                })
-
-                this.$store.commit('setIsLoading', false)
+                this.$store.commit('setIsLoading', false) 
             }
         },
         mounted(){
+            this.userProduct = this.$store.state.userProduct 
+            this.user = localStorage.getItem('token')   
+
+            document.title = 'Meus Produtos | Livre-se'
             this.getCategory()
+            
             
         },
         

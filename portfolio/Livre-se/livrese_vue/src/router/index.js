@@ -14,6 +14,7 @@ import Search from '../views/Search.vue'
 import SignUp from '../views/SignUp.vue'
 import Success from '../views/Success.vue'
 
+
 import AddProducts from '../views/AddProducts.vue'
 
 const routes = [
@@ -40,6 +41,8 @@ const routes = [
     name: 'LogIn',
     component: LogIn
   },
+
+
   {
     path: '/my-account',
     name: 'MyAccount',

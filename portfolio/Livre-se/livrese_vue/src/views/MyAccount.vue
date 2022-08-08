@@ -10,24 +10,38 @@
             <div class="column is-12">
                 <h2 class="subtitle">Meus Pedidos</h2>
 
-                <OrderSummary
+                <!-- <OrderSummary
                     v-for="order in orders"
                     v-bind:key="order.id"
-                    v-bind:order="order" />
+                    v-bind:order="order" /> -->
                 
             </div>
 
             <hr>
 
+            
+           
+            <div class="column is-12">
+                <h2 class="subtitle">Meus Produtos</h2>
+                <ProductBox
+                    v-for = "products in userProduct"
+                    v-bind:key="products.id"
+                    v-bind:products="products"
+                /> 
+                <div class="column is-12">
+                    <router-link to="/add-products" class="button is-success">Compartilhar experiências</router-link>
+                </div>
 
-
-            <myProducts />
+            </div>
+            
+            
 
             <hr>
+
             
-            <div class="column is-12">
-                <button @click="logout()" class="button is-danger">Sair</button>
-            </div>
+            <span class="column is-12">                
+                <button @click="logout()" class="button is-dark">Sair</button>
+            </span>
 
         </div>
     </div>
@@ -37,18 +51,18 @@
 import axios from 'axios'
 
 import OrderSummary from '@/components/OrderSummary.vue'
-import myProducts from  '@/components/myProducts.vue'
+ import ProductBox from  '@/components/ProductBox.vue' 
 
 export default {
     name: 'MyAccount',
     components: {
         OrderSummary,
-        myProducts
+        ProductBox 
     },
     data() {
         return {
             orders: [],
-            myProduct: []
+            userProduct: [] 
         }
     },
     mounted() {
@@ -79,6 +93,15 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+                
+            /* await axios
+                .get('/api/v1/marketplace/')
+                .then(response => {
+                    this.userProduct = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })   */          
 
             this.$store.commit('setIsLoading', false)
         }

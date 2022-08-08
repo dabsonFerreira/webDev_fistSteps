@@ -70,12 +70,11 @@ export default {
                     const token = response.data.auth_token
 
                     this.$store.commit('setToken', token)
-                    
                     axios.defaults.headers.common["Authorization"] = "Token " + token
 
                     localStorage.setItem("token", token)
 
-                    const toPath = this.$route.query.to || '/my-account'
+                    const toPath = this.$route.query.to || '/cart'
 
                     this.$router.push(toPath)
                 })
@@ -86,7 +85,6 @@ export default {
                         }
                     } else {
                         this.errors.push('Algo deu errado. Por favor tente novamente')
-                        
                         console.log(JSON.stringify(error))
                     }
                 })
